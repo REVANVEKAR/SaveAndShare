@@ -118,50 +118,50 @@ const ResourceClaimPage: React.FC = () => {
     <div className="flex flex-col md:flex-row md:space-x-6">
       {/* Resources Section (70%) */}
       <div className="w-full md:w-8/12">
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4 text-gray-800">Available Resources</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+          <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Available Resources</h2>
           
           {resources.length === 0 ? (
             <div className="text-center py-8">
-              <Package size={48} className="mx-auto text-gray-400 mb-3" />
-              <p className="text-gray-500">No resources available at the moment.</p>
-              <p className="text-gray-400 text-sm mt-1">Check back later for new donations</p>
+              <Package size={48} className="mx-auto text-gray-400 dark:text-gray-500 mb-3" />
+              <p className="text-gray-500 dark:text-gray-400">No resources available at the moment.</p>
+              <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">Check back later for new donations</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {resources.map((resource) => (
                 <div 
                   key={resource._id} 
-                  className="border border-gray-200 rounded-lg p-4 transition-all duration-200 hover:shadow-md"
+                  className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 transition-all duration-200 hover:shadow-md dark:bg-gray-700"
                 >
                   <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-lg font-medium text-gray-800">{resource.title}</h3>
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    <h3 className="text-lg font-medium text-gray-800 dark:text-white">{resource.title}</h3>
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
                       {resource.status === 'available' ? 'Available' : resource.status === 'claimed' ? 'Claimed' : 'Collected'}
                     </span>
                   </div>
                   
-                  <p className="text-gray-600 text-sm mb-3 line-clamp-2">{resource.description}</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 line-clamp-2">{resource.description}</p>
                   
-                  <div className="flex items-center text-sm text-gray-500 mb-2">
+                  <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
                     <MapPin size={16} className="mr-1 flex-shrink-0" />
                     <span className="truncate">{resource.location.address}</span>
                   </div>
                   
-                  <div className="flex items-center text-sm text-gray-500 mb-2">
+                  <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
                     <User size={16} className="mr-1 flex-shrink-0" />
                     <span>{resource.donorName}</span>
                   </div>
                   
-                  <div className="flex items-center text-sm text-gray-500 mb-4">
+                  <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
                     <Calendar size={16} className="mr-1 flex-shrink-0" />
                     <span>{formatDate(resource.createdAt)}</span>
                   </div>
                   
-                  <div className="flex space-x-2 mt-2">
+                  <div className="flex space-x-2">
                     <button
                       onClick={() => handleShowLocation(resource.location)}
-                      className="flex items-center justify-center px-3 py-1.5 border border-gray-300 text-sm leading-5 rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out"
+                      className="flex items-center justify-center px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-sm leading-5 rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:text-gray-500 dark:hover:text-gray-200 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition duration-150 ease-in-out"
                     >
                       <MapPin size={16} className="mr-1" />
                       View Location
@@ -170,7 +170,7 @@ const ResourceClaimPage: React.FC = () => {
                     {resource.status === 'available' && (
                       <button
                         onClick={() => handleClaim(resource._id)}
-                        className="flex items-center justify-center px-3 py-1.5 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out"
+                        className="flex items-center justify-center px-3 py-1.5 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 dark:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out"
                       >
                         Claim Resource
                       </button>
@@ -185,21 +185,21 @@ const ResourceClaimPage: React.FC = () => {
 
       {/* Upcoming Drives Section (30%) */}
       <div className="w-full md:w-4/12">
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold mb-4 text-gray-800">Upcoming Drives</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+          <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Upcoming Drives</h2>
           
           {drives.length === 0 ? (
             <div className="text-center py-8">
-              <Calendar size={48} className="mx-auto text-gray-400 mb-3" />
-              <p className="text-gray-500">No upcoming drives</p>
-              <p className="text-gray-400 text-sm mt-1">Create a new drive from the Post Drives page</p>
+              <Calendar size={48} className="mx-auto text-gray-400 dark:text-gray-500 mb-3" />
+              <p className="text-gray-500 dark:text-gray-400">No upcoming drives</p>
+              <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">Create a new drive from the Post Drives page</p>
             </div>
           ) : (
             <div className="space-y-4">
               {drives.map((drive) => (
                 <div 
                   key={drive._id} 
-                  className="border border-gray-200 rounded-lg overflow-hidden transition-all duration-200 hover:shadow-md"
+                  className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden transition-all duration-200 hover:shadow-md dark:bg-gray-700"
                 >
                   <div 
                     className="h-32 bg-cover bg-center"
@@ -207,29 +207,29 @@ const ResourceClaimPage: React.FC = () => {
                   />
                   <div className="p-4">
                     <div className="flex justify-between items-start">
-                      <h3 className="text-md font-medium text-gray-800">{drive.title}</h3>
+                      <h3 className="text-md font-medium text-gray-800 dark:text-white">{drive.title}</h3>
                       <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
-                        drive.type === 'food' ? 'bg-green-100 text-green-800' :
-                        drive.type === 'clothing' ? 'bg-purple-100 text-purple-800' :
-                        drive.type === 'medical' ? 'bg-red-100 text-red-800' :
-                        drive.type === 'education' ? 'bg-yellow-100 text-yellow-800' :
-                        drive.type === 'volunteer' ? 'bg-blue-100 text-blue-800' :
-                        'bg-gray-100 text-gray-800'
+                        drive.type === 'food' ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' :
+                        drive.type === 'clothing' ? 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200' :
+                        drive.type === 'medical' ? 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200' :
+                        drive.type === 'education' ? 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200' :
+                        drive.type === 'volunteer' ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200' :
+                        'bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200'
                       }`}>
                         {drive.type.charAt(0).toUpperCase() + drive.type.slice(1)}
                       </span>
                     </div>
                     
-                    <div className="mt-2 flex items-center text-xs text-gray-500">
+                    <div className="mt-2 flex items-center text-xs text-gray-500 dark:text-gray-400">
                       <Calendar size={14} className="mr-1" />
                       {formatDate(drive.date)}
                       <Clock size={14} className="ml-2 mr-1" />
                       {drive.time}
                     </div>
                     
-                    <p className="mt-2 text-sm text-gray-600 line-clamp-2">{drive.description}</p>
+                    <p className="mt-2 text-sm text-gray-600 dark:text-gray-300 line-clamp-2">{drive.description}</p>
                     
-                    <div className="mt-3 text-xs font-medium text-blue-600 hover:text-blue-500 flex items-center cursor-pointer">
+                    <div className="mt-3 text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 flex items-center cursor-pointer">
                       <span>View details</span>
                       <ExternalLink size={12} className="ml-1" />
                     </div>
