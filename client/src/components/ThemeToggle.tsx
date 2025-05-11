@@ -3,31 +3,37 @@ import { Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { motion } from 'framer-motion';
 
-const ThemeToggle: React.FC = () => {
+interface ThemeToggleProps {
+  className?: string;
+}
+
+const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
   const { isDarkMode, toggleTheme } = useTheme();
 
   return (
-    <button
-      onClick={toggleTheme}
-      className={`
-        relative inline-flex items-center justify-center w-12 h-6 rounded-full
-        transition-colors duration-200 focus:outline-none
-        ${isDarkMode ? 'bg-blue-600' : 'bg-gray-200'}
-      `}
-      aria-label="Toggle theme"
-    >
-      <motion.div
+    <div className={`${className}`}>
+      <button
+        onClick={toggleTheme}
         className={`
-          absolute left-1 flex items-center justify-center w-4 h-4 rounded-full
-          ${isDarkMode ? 'text-yellow-200' : 'text-gray-700'}
+          relative inline-flex items-center justify-center w-12 h-6 rounded-full
+          transition-colors duration-200 focus:outline-none shadow-lg hover:scale-110 transform
+          ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-200 hover:bg-gray-300'}
         `}
-        animate={{ x: isDarkMode ? '1.5rem' : '0rem' }}
-        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+        aria-label="Toggle theme"
       >
-        {isDarkMode ? <Moon size={12} /> : <Sun size={12} />}
-      </motion.div>
-    </button>
+        <motion.div
+          className={`
+            absolute left-1 flex items-center justify-center w-4 h-4 rounded-full
+            ${isDarkMode ? 'text-yellow-200' : 'text-gray-700'}
+          `}
+          animate={{ x: isDarkMode ? '1.5rem' : '0rem' }}
+          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+        >
+          {isDarkMode ? <Moon size={12} /> : <Sun size={12} />}
+        </motion.div>
+      </button>
+    </div>
   );
 };
 
-export default ThemeToggle; 
+export default ThemeToggle;

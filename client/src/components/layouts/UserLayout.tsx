@@ -45,33 +45,52 @@ const UserLayout: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header / Navigation Bar */}
-      <header className="bg-white dark:bg-gray-800 shadow-md">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center">
-            <Building2 className="h-8 w-8 text-blue-600" />
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white ml-2">CommAid</h1>
-          </div>
-          <div className="flex items-center space-x-6">
-            <ThemeToggle />
-            <button
-              onClick={() => setShowProfileModal(true)}
-              className="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+      <motion.header 
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="sticky top-0 z-50 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700"
+      >
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <motion.div 
+              className="flex items-center space-x-3"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              <div className="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-300">
-                {userData?.name?.charAt(0).toUpperCase()}
-              </div>
-              <span className="hidden md:inline ml-2">{userData?.name}</span>
-            </button>
-            <button
-              onClick={handleLogout}
-              className="flex items-center text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200"
-            >
-              <LogOut size={20} />
-              <span className="hidden md:inline ml-1">Logout</span>
-            </button>
+              <Building2 className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 dark:from-blue-400 dark:to-blue-300 bg-clip-text text-transparent">
+                Save&Share
+              </h1>
+            </motion.div>
+
+            <div className="flex items-center space-x-8">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setShowProfileModal(true)}
+                className="flex items-center space-x-3 px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200"
+              >
+                <div className="h-8 w-8 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 flex items-center justify-center text-white font-medium shadow-inner">
+                  {userData?.name?.charAt(0).toUpperCase()}
+                </div>
+                <span className="hidden md:inline text-gray-700 dark:text-gray-200 font-medium">
+                  {userData?.name}
+                </span>
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleLogout}
+                className="flex items-center space-x-2 px-4 py-2 rounded-full text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200"
+              >
+                <LogOut size={20} />
+                <span className="hidden md:inline font-medium">Logout</span>
+              </motion.button>
+            </div>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       {/* Main Content */}
       <main className="flex-grow container mx-auto px-4 py-6">
@@ -83,6 +102,11 @@ const UserLayout: React.FC = () => {
           <Outlet />
         </motion.div>
       </main>
+
+      {/* Theme Toggle - Fixed Bottom Right */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <ThemeToggle className="bg-white dark:bg-gray-800 p-2 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200" />
+      </div>
 
       {/* Profile Modal */}
       <AnimatePresence>

@@ -153,7 +153,7 @@ const Home: React.FC = () => {
             <div className="mb-4 md:mb-0">
               <h2 className="text-2xl font-bold flex items-center">
                 <Heart size={24} className="mr-2" />
-                CommAid
+                Save&Share
               </h2>
               <p className="text-gray-400 mt-1">Connecting communities for a better world</p>
             </div>

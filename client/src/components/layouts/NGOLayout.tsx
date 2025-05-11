@@ -92,9 +92,8 @@ const NGOLayout: React.FC = () => {
           <div className="flex items-center justify-between flex-shrink-0 px-4 mb-8">
             <div className="flex items-center">
               <Building2 className="h-8 w-8 text-blue-600" />
-              <span className="ml-2 text-2xl font-bold text-gray-900 dark:text-white">CommAid</span>
+              <span className="ml-2 text-2xl font-bold text-gray-900 dark:text-white">Save&Share</span>
             </div>
-            <ThemeToggle />
           </div>
           <nav className="flex-1 px-2 space-y-1">
             {navigationItems.map((item) => {
@@ -178,15 +177,14 @@ const NGOLayout: React.FC = () => {
       </div>
 
       {/* Mobile Header */}
-      <div className="md:hidden bg-white dark:bg-gray-800 shadow-sm">
+      <div className="md:hidden bg-white dark:bg-gray-800 shadow-md">
         <div className="px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <Building2 className="h-8 w-8 text-blue-600" />
-              <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">CommAid</span>
+              <span className="ml-2 text-l font-bold text-gray-900 dark:text-white">Save&Share</span>
             </div>
             <div className="flex items-center space-x-4">
-              <ThemeToggle />
               <button
                 onClick={() => setShowMobileMenu(!showMobileMenu)}
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
@@ -276,6 +274,11 @@ const NGOLayout: React.FC = () => {
             <Outlet />
           </motion.div>
         </main>
+      </div>
+
+      {/* Theme Toggle - Fixed Bottom Right */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <ThemeToggle className="bg-white dark:bg-gray-800 p-2 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200" />
       </div>
 
       {/* Profile Modal */}

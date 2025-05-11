@@ -9,7 +9,12 @@ const router = express.Router();
 // Create a new drive (NGO only)
 router.post('/', auth, isNGO, async (req, res) => {
   try {
-    const { title, description, date, time, type, resourcesRequired, imageUrl, location } = req.body;
+    const { title, description, date, time, type, resourcesRequired, imageUrl } = req.body;
+    
+    // Validate image URL if provided
+    if (imageUrl && !imageUrl.startsWith('http')) {
+      return res.status(400).json({ message: 'Invalid image URL format' });
+    }
     
     const drive = new Drive({
       title,
@@ -18,9 +23,9 @@ router.post('/', auth, isNGO, async (req, res) => {
       time,
       type,
       resourcesRequired,
-      imageUrl,
-      location,
-      ngoId: req.user.id
+      imageUrl: imageUrl || null,
+      ngoId: req.user.id,
+      status: 'active'
     });
     
     await drive.save();
